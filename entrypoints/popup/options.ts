@@ -35,14 +35,14 @@ apiKeyInput.oninput = updateApiKey;
 quickTagsInput.oninput = updateQuickTags;
 
 // on startup, load the stored values
-const [apiKey, quickTags, username, active] = await Promise.all([
+Promise.all([
 	storageApiKey.getValue(),
 	storageQuickTags.getValue(),
 	storageUsername.getValue(),
 	storageActive.getValue(),
-]);
-
-apiKeyInput.value = apiKey ?? "";
-quickTagsInput.value = quickTags ?? "";
-usernameInput.value = username ?? "";
-activeInput.checked = active ?? true;
+]).then(([apiKey, quickTags, username, active]) => {
+	apiKeyInput.value = apiKey ?? "";
+	quickTagsInput.value = quickTags ?? "";
+	usernameInput.value = username ?? "";
+	activeInput.checked = active ?? true;
+});
