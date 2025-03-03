@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Settings</title>
+  <meta name="manifest.type" content="page_action|browser_action" />
+  <meta name="manifest.default_icon" content="icon/hashtag.svg" />
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Settings</h1>
+    <div class="form-group
+			">
+      <label for="active">Active</label>
+      <input type="checkbox" id="active" name="active">
+    </div>
+    <div class="form-group
+			">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username">
+    </div>
+    <div class="form-group
+			">
+      <label for="api-key">API Key</label>
+      <input type="text" id="api-key" name="api-key">
+    </div>
+    <!-- The quick tags to apply -->
+    <div class="form-group">
+      <label for="quick-tags">Quick Tags</label>
+      <input type="text" id="quick-tags" name="quick-tags">
+    </div>
+  </div>
+  <script type="module" src="options.ts"></script>
+</body>
+
+</html>

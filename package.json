@@ -1,0 +1,23 @@
+{
+	"name": "e621-quick-tag",
+	"description": "A tool for quickly tagging e621 posts.",
+	"private": true,
+	"version": "0.0.1",
+	"type": "module",
+	"scripts": {
+		"dev": "wxt",
+		"dev:firefox": "wxt -b firefox",
+		"build": "wxt build",
+		"build:firefox": "wxt build -b firefox",
+		"zip": "wxt zip",
+		"zip:firefox": "wxt zip -b firefox",
+		"compile": "tsc --noEmit",
+		"postinstall": "wxt prepare"
+	},
+	"devDependencies": {
+		"@types/chrome": "^0.0.280",
+		"typescript": "^5.6.3",
+		"wxt": "^0.19.13"
+	},
+	"packageManager": "pnpm@9.7.0+sha256.b35018fbfa8f583668b2649e407922a721355cd81f61beeb4ac1d4258e585559"
+}
