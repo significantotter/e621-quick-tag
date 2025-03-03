@@ -18,7 +18,7 @@ export default defineConfig({
 		browser_specific_settings: {
 			gecko: {
 				id: "e6-quick-tag@significantotter",
-				strict_min_version: "58.0",
+				strict_min_version: "79.0",
 			},
 		},
 		permissions: ["storage"],
