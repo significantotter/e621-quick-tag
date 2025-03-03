@@ -8,7 +8,8 @@ export default defineConfig({
 		name: "e6-quick-tag",
 		version: "1.0",
 
-		description: "Adds a shortcut to tag pokemorphs.",
+		description:
+			"Adds a shortcut to quickly tag e621 images with a tag preset.",
 		icons: {
 			"48": "icon/hashtag.svg",
 			"96": "icon/hashtag.svg",
