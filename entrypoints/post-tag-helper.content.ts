@@ -2,6 +2,7 @@ import {
 	storageActive,
 	storageApiKey,
 	storageQuickTags,
+	storageReason,
 	storageUsername,
 } from "@/utils/storage";
 import { getTagDiff } from "@/utils/tags";
@@ -10,10 +11,12 @@ const generateSidebarTagButton = async ({
 	username,
 	apiKey,
 	tagDiff,
+	reason,
 }: {
 	username: string;
 	apiKey: string;
 	tagDiff: string;
+	reason: string;
 }) => {
 	// get the relevant page details
 	const sidebar = document.getElementById("sidebar");
@@ -42,6 +45,7 @@ const generateSidebarTagButton = async ({
 				body: JSON.stringify({
 					post: {
 						tag_string_diff: tagDiff,
+						edit_reason: reason === "" || reason == null ? undefined : reason,
 					},
 				}),
 			}
@@ -69,10 +73,11 @@ function teardownDom() {
 
 // fetch the needed info from storage
 async function fetchStorageAndRun() {
-	const [apiKey, quickTags, username, active] = await Promise.all([
+	const [apiKey, quickTags, username, reason, active] = await Promise.all([
 		storageApiKey.getValue(),
 		storageQuickTags.getValue(),
 		storageUsername.getValue(),
+		storageReason.getValue(),
 		storageActive.getValue(),
 	]);
 
@@ -88,7 +93,7 @@ async function fetchStorageAndRun() {
 	teardownDom();
 
 	if (!active || tagDiff === "") return;
-	generateSidebarTagButton({ apiKey, tagDiff, username });
+	generateSidebarTagButton({ apiKey, tagDiff, username, reason });
 }
 
 export default defineContentScript({
@@ -106,16 +111,17 @@ export default defineContentScript({
 		"**/posts/9*",
 	],
 	main() {
-		storageActive.watch((oldActive, newActive) => {
-			if (newActive === false) {
-				teardownDom();
-			} else {
+		storageActive.watch((_oldActive, newActive) => {
+			if (!newActive) {
 				fetchStorageAndRun();
+			} else {
+				teardownDom();
 			}
 		});
-		storageQuickTags.watch(fetchStorageAndRun);
-		storageUsername.watch(fetchStorageAndRun);
-		storageApiKey.watch(fetchStorageAndRun);
+		storageQuickTags.watch(() => fetchStorageAndRun());
+		storageUsername.watch(() => fetchStorageAndRun());
+		storageApiKey.watch(() => fetchStorageAndRun());
+		storageReason.watch(() => fetchStorageAndRun());
 
 		fetchStorageAndRun();
 	},
