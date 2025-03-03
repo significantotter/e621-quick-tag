@@ -116,9 +116,6 @@ export default defineContentScript({
 		"**/posts/9*",
 	],
 	main() {
-		console.log("starting the post search helper!");
-		document.body.style.border = "5px solid green";
-
 		storageActive.watch((oldActive, newActive) => {
 			if (newActive !== false) {
 				fetchStorageAndRun();

@@ -106,7 +106,6 @@ export default defineContentScript({
 		"**/posts/9*",
 	],
 	main() {
-		document.body.style.border = "5px solid red";
 		storageActive.watch((oldActive, newActive) => {
 			if (newActive === false) {
 				teardownDom();
@@ -118,7 +117,6 @@ export default defineContentScript({
 		storageUsername.watch(fetchStorageAndRun);
 		storageApiKey.watch(fetchStorageAndRun);
 
-		console.log("starting the post tag helper!");
 		fetchStorageAndRun();
 	},
 });
